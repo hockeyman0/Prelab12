@@ -14,12 +14,14 @@ class ExecuteUnit:
 		self.registers = registers
 
 	def executeInstruction(self):
+		machinecode = 00 #import machine code here
+		InstructionObject = self.fetch.processInstruction(machinecode)
 		#instructionOBJ
-		op = InstructionFetchAndDecode.getOp()
+		op = InstructionObject.getOp()
 
 		if op == 'lw':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			tup2 = InstructionFetchAndDecode.getMem2()
+			tup1 = InstructionObject.getMem1()
+			tup2 = InstructionObject.getMem2()
 			if tup1[0] == 'imm':
 				valtoload = tup1[1]
 			elif tup1[0] == 'reg':
@@ -28,59 +30,59 @@ class ExecuteUnit:
 				valtoload = self.data.loadValue(tup1[1])
 			
 			self.registers.storeValue(tup2[1],valtoload)
-			InstructionFetchAndDecode.incrementPC()
+			self.fetch.incrementPC()
 		elif op == 'sw':
-			reg = InstructionFetchAndDecode.getReg()
+			reg = InstructionObject.getReg()
 			valtoload = self.registers.loadValue(reg)
-			tup1 = InstructionFetchAndDecode.getMem1()
+			tup1 = InstructionObject.getMem1()
 			self.data.storeValue(tup1[1],valtoload)
 		elif op == 'add':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			tup2 = InstructionFetchAndDecode.getMem2()
-			reg = InstructionFetchAndDecode.getReg()
+			tup1 = InstructionObject.getMem1()
+			tup2 = InstructionObject.getMem2()
+			reg = InstructionObject.getReg()
 
 			num1 = self.data.loadValue(tup1[1])
 			num2 = self.data.loadValue(tup2[1])
 
 			self.registers.storeValue(reg,num1+num2)
 		elif op =='sub':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			tup2 = InstructionFetchAndDecode.getMem2()
-			reg = InstructionFetchAndDecode.getReg()
+			tup1 = InstructionObject.getMem1()
+			tup2 = InstructionObject.getMem2()
+			reg = InstructionObject.getReg()
 
 			num1 = self.data.loadValue(tup1[1])
 			num2 = self.data.loadValue(tup2[1])
 
 			self.registers.storeValue(reg,num1-num2)
 		elif op == 'mul':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			tup2 = InstructionFetchAndDecode.getMem2()
-			reg = InstructionFetchAndDecode.getReg()
+			tup1 = InstructionObject.getMem1()
+			tup2 = InstructionObject.getMem2()
+			reg = InstructionObject.getReg()
 
 			num1 = self.data.loadValue(tup1[1])
 			num2 = self.data.loadValue(tup2[1])
 
 			self.registers.storeValue(reg,num1*num2)
 		elif op == 'div':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			tup2 = InstructionFetchAndDecode.getMem2()
-			reg = InstructionFetchAndDecode.getReg()
+			tup1 = InstructionObject.getMem1()
+			tup2 = InstructionObject.getMem2()
+			reg = InstructionObject.getReg()
 
 			num1 = self.data.loadValue(tup1[1])
 			num2 = self.data.loadValue(tup2[1])
 
 			self.registers.storeValue(reg,num1/num2)
 		elif op == 'beq':
-			reg = InstructionFetchAndDecode.getReg()
-			tup1 = InstructionFetchAndDecode.getMem1()
+			reg = InstructionObject.getReg()
+			tup1 = InstructionObject.getMem1()
 
 			num1 = self.register.loadValue(reg)
 			if num1 == 0:
-				InstructionFetchAndDecode.updatePC(tup1[1])
+				self.fetch.updatePC(tup1[1])
 			else:
-				InstructionFetchAndDecode.incrementPC()
+				self.fetch.incrementPC()
 		elif op == 'jmp':
-			tup1 = InstructionFetchAndDecode.getMem1()
-			InstructionFetchAndDecode.updatePC(tup1[1])
+			tup1 = InstructionObject.getMem1()
+			self.fetch.updatePC(tup1[1])
 
 				
