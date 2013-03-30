@@ -8,6 +8,7 @@
 import sys
 import os
 import re
+import math
 
 class Assembler:
     def __init__(self, filename):
@@ -26,7 +27,7 @@ class Assembler:
         reg2=r"!(?P<num>[0-9]+)"
         
         if instructionString=='halt':
-            return 3
+            return pow(2,31)+pow(2,30)
         stringBin='00'
         instr=instructionString.split()
         instr2=instr[1].split(',')
