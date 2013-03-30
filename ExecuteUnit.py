@@ -14,6 +14,7 @@ class ExecuteUnit:
 		self.registers = registers
 
 	def executeInstruction(self):
+		#instructionOBJ
 		op = InstructionFetchAndDecode.getOp()
 
 		if op == 'lw':
