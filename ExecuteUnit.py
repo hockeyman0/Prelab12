@@ -14,7 +14,7 @@ class ExecuteUnit:
 		self.registers = registers
 
 	def executeInstruction(self):
-		machinecode = 00 #import machine code here
+		machinecode = self.fetch.fetchInstruction()#import machine code here
 		InstructionObject = self.fetch.processInstruction(machinecode)
 		#instructionOBJ
 		op = InstructionObject.getOp()

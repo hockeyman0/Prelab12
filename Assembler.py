@@ -31,6 +31,8 @@ class Assembler:
         stringBin='00'
         instr=instructionString.split()
         instr2=instr[1].split(',')
+        print instr
+        print instr2
         
         stringBin+=opcode.get(instr[0])
         
@@ -86,7 +88,7 @@ class Assembler:
         
         lineNum=0
         for line in self.file:
-            machine = self.parseInstructions(line)
+            machine = self.parseInstruction(line)
             memory.storeValue(lineNum, machine)
             lineNum+=1
 
