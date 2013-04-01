@@ -51,7 +51,9 @@ class InstructionMemory(Memory):
 		for i in range(len(self.memarray)):
 			binstr = bin(self.memarray[i])
 			binstr = binstr[2:].zfill(32)
-			print "{0} -> {1} <{2}>".format(i, binstr, self.numaccess[i])	
+			hexstr = hex(i)
+			hexstr = hexstr[2:].zfill(4)
+			print "{0} -> {1} <{2}>".format(hexstr, binstr, self.numaccess[i])	
 		
 	def loadValue(self, location):
 		if location < 0 or location > len(self.memarray) - 1:
