@@ -23,9 +23,9 @@ class Processor:
         self.ExeUnit=ExecuteUnit.ExecuteUnit(self.FetchDec,self.DataMem,self.Reg)
 
     def simulate(self):
-		halt = pow(2,31) + pow(2,30)
-		temp = 0
-		count = 0
+		#halt = pow(2,31) + pow(2,30)
+		#temp = 0
+		#count = 0
 		for loops in range(32):
 			self.ExeUnit.executeInstruction()
 			

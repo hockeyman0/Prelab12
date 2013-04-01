@@ -35,21 +35,17 @@ class Assembler:
                 
         stringBin+=opcode.get(instr[0])
                 
-        print stringBin
         
         if instr[0] != 'jmp':
             stringBin+=regcode.get(instr2[0])
         else:
             ob=re.match(reg2, instr2[0])
-<<<<<<< .mine
             stringBin+='00001'+self.binConversion(int(ob.group('num')))
             stringBin+='000000000000'
             return self.strToBin(stringBin)
-=======
             stringBin+='00001'+self.binConversion(int(ob.group('num')))
             stringBin+='000000000000'
             return self.strToBin(stringBin)
->>>>>>> .r13
         
         if re.match(reg,instr2[1]):
             stringBin+='00'+'0000000'+regcode.get(instr2[1])
