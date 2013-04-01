@@ -31,13 +31,17 @@ class Assembler:
         stringBin='00'
         instr=instructionString.split()
         instr2=instr[1].split(',')
-        print instr
-        print instr2
         
+                
         stringBin+=opcode.get(instr[0])
         
         if instr[0] != 'jmp':
             stringBin+=regcode.get(instr2[0])
+        else
+            ob=re.match(reg2, instr2[0])
+                stringBin+='01'+self.binConversion(int(ob.group('num')))
+                stringBin+='000000000000000'
+                return self.strToBin(stringBin)
         
         if re.match(reg,instr2[1]):
             stringBin+='00'+'0000000'+regcode.get(instr2[1])
